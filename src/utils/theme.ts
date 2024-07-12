@@ -11,4 +11,8 @@ const breakpoints = {
 
 export const chakraUiTheme = extendTheme({
   breakpoints,
+  colors: {
+    mainGreen: "#38A169",
+    activeGreen: "#2F855A",
+  },
 });

@@ -1,5 +1,6 @@
 "use client";
 
+import SearchInput from "@/components/form-elements/SearchInput";
 import StoriesSide from "@/components/StoriesSide";
 import { Flex } from "@chakra-ui/react";
 import { useRef } from "react";
@@ -61,6 +62,7 @@ export default function Home() {
     <main>
       <Flex
         ref={containerRef}
+        flexDirection={"column"}
         width={{
           base: "300px",
           sm: "480px",
@@ -75,6 +77,7 @@ export default function Home() {
         overflowY={"auto"}
       >
         <StoriesSide response={response} />
+        <SearchInput placeholder="Arama yap" />
       </Flex>
     </main>
   );
