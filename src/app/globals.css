@@ -1,4 +1,12 @@
-* {
-  margin: 0px;
+@font-face {
+  font-family: "Outfit";
+  src: url("../../public/fonts/Outfit-VariableFont_wght.ttf") format("ttf");
+  font-weight: normal;
+  font-style: normal;
+}
+
+body {
   padding: 0px;
+  margin: 0px;
+  font-family: "Outfit", sans-serif;
 }
