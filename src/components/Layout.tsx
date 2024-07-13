@@ -14,7 +14,7 @@ const Layout: FC<Props> = ({ children }) => {
           justifyContent={"flex-start"}
           height={{ base: "70px", sm: "90px", md: "100px" }}
           padding={"10px 30px"}
-          boxShadow={`0px 6px 10px ${chakraUiTheme.colors.mainGray}`}
+          boxShadow={`0px 6px 6px ${chakraUiTheme.colors.mainGray}`}
         >
           <Image src="images/logos/otovinn-logo.webp" alt="Otovinn Logo" />
         </Flex>
