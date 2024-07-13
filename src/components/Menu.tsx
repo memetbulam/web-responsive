@@ -55,7 +55,7 @@ const Menu: FC<Props> = ({ response, searchValue }) => {
           return (
             <Link
               key={menu.id}
-              href={`/${menu?.title?.replaceAll(" ", "-").toLocaleLowerCase()}`}
+              href={"/"}
               style={{
                 display: "flex",
                 justifyContent: "center",
