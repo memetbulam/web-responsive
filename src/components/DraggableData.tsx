@@ -92,7 +92,6 @@ const DraggableData: FC<Props> = ({ children, dataLength, innerItemWidth }) => {
   return (
     <Flex
       ref={containerRef}
-      width={"100%"}
       overflow={"hidden"}
       onMouseLeave={() => setIsDragging(false)}
     >
