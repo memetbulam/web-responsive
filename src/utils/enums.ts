@@ -6,3 +6,8 @@ export enum breakpointsValues {
   Xl = "xl",
   "2xl" = "2xl",
 }
+
+export enum StationHoveredIconKeys {
+  Calendar = "calendar",
+  Heart = "heart",
+}

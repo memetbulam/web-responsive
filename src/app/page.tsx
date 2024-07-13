@@ -105,7 +105,7 @@ export default function Home() {
       stations: [
         {
           title: "Yakınımdakiler",
-          order: 3,
+          order: 1,
           station: [
             {
               name: "aa",
@@ -135,7 +135,7 @@ export default function Home() {
         },
         {
           title: "Son Alınan Hizmetler",
-          order: 1,
+          order: 2,
           station: [
             {
               name: "yy",
@@ -183,7 +183,7 @@ export default function Home() {
         },
         {
           title: "Haftanın En'leri",
-          order: 2,
+          order: 3,
           station: [
             {
               name: "uu",
@@ -242,7 +242,7 @@ export default function Home() {
         <StoriesSide response={response} />
         <SearchInput placeholder="Arama yap" />
         <Menu response={response} />
-        <Text fontSize={"24px"} fontWeight={500} marginLeft={"20px"}>
+        <Text fontSize={{ base: "16px", lg: "18px" }} fontWeight={"bold"}>
           Kampanyalar
         </Text>
         <CampaignsSide response={response} />

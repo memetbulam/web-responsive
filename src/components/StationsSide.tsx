@@ -1,10 +1,12 @@
-import React, { FC } from "react";
-import { Image, Flex, Text, Grid, GridItem } from "@chakra-ui/react";
+import React, { FC, useState } from "react";
+import { Image, Flex, Text, Grid, GridItem, Button } from "@chakra-ui/react";
 import DraggableData from "./DraggableData";
 import StarIcon from "./icons/StarIcon";
 import { chakraUiTheme } from "@/utils/theme";
 import CalendarIcon from "./icons/CalendarIcon";
 import HeartIcon from "./icons/HeartIcon";
+import { StationHoveredIconKeys } from "@/utils/enums";
+import { StationHoveredIcon } from "@/utils/types";
 
 interface Props {
   response: {
@@ -38,18 +40,28 @@ interface Props {
 }
 
 const StationsSide: FC<Props> = ({ response }) => {
+  const [isHoveredButton, setIsHoveredButton] = useState<StationHoveredIcon>({
+    key: undefined,
+    value: false,
+  });
   const sortedData = response?.data?.stations?.sort(
     (a, b) => a.order - b.order
   );
 
-  console.log(sortedData);
   return (
-    <Flex flexDirection={"column"}>
+    <Flex flexDirection={"column"} marginBottom={"40px"}>
       {sortedData?.map((item) => {
         return (
           <Flex flexDirection={"column"} key={item?.title}>
-            <Flex alignItems={"center"} justifyContent={"space-between"}>
-              <Text>{item?.title}</Text> <Text>tümünü gör</Text>
+            <Flex
+              alignItems={"center"}
+              justifyContent={"space-between"}
+              margin={"30px 0px 8px 0px"}
+            >
+              <Text fontSize={{ base: "16px", lg: "18px" }} fontWeight={"bold"}>
+                {item?.title}
+              </Text>
+              <Text>tümünü gör</Text>
             </Flex>
             <DraggableData
               dataLength={item?.station?.length}
@@ -65,13 +77,13 @@ const StationsSide: FC<Props> = ({ response }) => {
                     alignItems={"center"}
                     borderRadius={"12px"}
                     padding={"12px 20px"}
-                    userSelect={"none"}
                   >
                     <Image
                       width={"100px"}
                       height={"100px"}
                       borderRadius={"12px"}
                       draggable={false}
+                      userSelect={"none"}
                       src={station.image}
                       alt={station.name}
                     />
@@ -93,6 +105,7 @@ const StationsSide: FC<Props> = ({ response }) => {
                               key={index}
                               width={"16px"}
                               height={"16px"}
+                              style={{ userSelect: "none" }}
                               fill={
                                 index < station.point
                                   ? chakraUiTheme.colors.activeGreen
@@ -102,18 +115,48 @@ const StationsSide: FC<Props> = ({ response }) => {
                           ))}
                       </GridItem>
                       <GridItem fontWeight={500}>{station.name}</GridItem>
-                      <GridItem
-                        color={"gray.500"}
-                        display={"flex"}
-                        alignItems={"center"}
-                        gap={"8px"}
-                      >
-                        <CalendarIcon
-                          width={"14px"}
-                          height={"14px"}
-                          fill={chakraUiTheme.colors.activeGray}
-                        />
-                        <Text fontSize={"14px"}>Randevu al</Text>
+                      <GridItem>
+                        <Button
+                          type="button"
+                          backgroundColor={"transparent"}
+                          padding={"2px"}
+                          height={"24px"}
+                          color={"gray.500"}
+                          verticalAlign={"baseline"}
+                          _hover={{
+                            backgroundColor: "transparent",
+                            color: "activeGreen",
+                          }}
+                          transition={"color 0.3s"}
+                          onMouseEnter={() =>
+                            setIsHoveredButton({
+                              key: StationHoveredIconKeys.Calendar,
+                              value: true,
+                            })
+                          }
+                          onMouseLeave={() =>
+                            setIsHoveredButton({
+                              key: StationHoveredIconKeys.Calendar,
+                              value: false,
+                            })
+                          }
+                        >
+                          <CalendarIcon
+                            width={"14px"}
+                            height={"14px"}
+                            fill={
+                              isHoveredButton.key ===
+                                StationHoveredIconKeys.Calendar &&
+                              isHoveredButton.value
+                                ? chakraUiTheme.colors.activeGreen
+                                : chakraUiTheme.colors.activeGray
+                            }
+                            style={{ transition: "color 0.3s" }}
+                          />
+                          <Text fontSize={"14px"} marginLeft={"4px"}>
+                            Randevu al
+                          </Text>
+                        </Button>
                       </GridItem>
                       <GridItem
                         color={"gray.500"}
@@ -121,12 +164,47 @@ const StationsSide: FC<Props> = ({ response }) => {
                         alignItems={"center"}
                         gap={"8px"}
                       >
-                        <HeartIcon
-                          width={"14px"}
-                          height={"14px"}
-                          fill={chakraUiTheme.colors.activeGray}
-                        />
-                        <Text fontSize={"14px"}>Favorilere ekle</Text>
+                        <Button
+                          type="button"
+                          backgroundColor={"transparent"}
+                          padding={"2px"}
+                          height={"24px"}
+                          color={"gray.500"}
+                          verticalAlign={"baseline"}
+                          _hover={{
+                            backgroundColor: "transparent",
+                            color: "activeGreen",
+                          }}
+                          transition={"color 0.3s"}
+                          onMouseEnter={() =>
+                            setIsHoveredButton({
+                              key: StationHoveredIconKeys.Heart,
+                              value: true,
+                            })
+                          }
+                          onMouseLeave={() =>
+                            setIsHoveredButton({
+                              key: StationHoveredIconKeys.Heart,
+                              value: false,
+                            })
+                          }
+                        >
+                          <HeartIcon
+                            width={"14px"}
+                            height={"14px"}
+                            fill={
+                              isHoveredButton.key ===
+                                StationHoveredIconKeys.Heart &&
+                              isHoveredButton.value
+                                ? chakraUiTheme.colors.activeGreen
+                                : chakraUiTheme.colors.activeGray
+                            }
+                            style={{ transition: "color 0.3s" }}
+                          />
+                          <Text fontSize={"14px"} marginLeft={"4px"}>
+                            Favorilere ekle
+                          </Text>
+                        </Button>
                       </GridItem>
                     </Grid>
                   </Flex>

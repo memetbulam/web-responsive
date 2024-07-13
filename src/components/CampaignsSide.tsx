@@ -1,5 +1,5 @@
-import { Box, Flex, Image, useBreakpoint } from "@chakra-ui/react";
 import React, { FC, useEffect, useMemo } from "react";
+import { Box, Flex, Image, useBreakpoint } from "@chakra-ui/react";
 import SiliderButton from "./SiliderButton";
 import { useSliderContext } from "@/contexts/useSliderContext";
 import { breakpointsValues } from "@/utils/enums";
