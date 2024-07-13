@@ -3,6 +3,7 @@
 import CampaignsSide from "@/components/CampaignsSide";
 import SearchInput from "@/components/form-elements/SearchInput";
 import Menu from "@/components/Menu";
+import StationsSide from "@/components/StationsSide";
 import StoriesSide from "@/components/StoriesSide";
 import { Flex, Text } from "@chakra-ui/react";
 import { useRef } from "react";
@@ -101,6 +102,122 @@ export default function Home() {
           url: "https://deep-image.ai/blog/content/images/2022/09/underwater-magic-world-8tyxt9yz.jpeg",
         },
       ],
+      stations: [
+        {
+          title: "Yakınımdakiler",
+          order: 3,
+          station: [
+            {
+              name: "aa",
+              image:
+                "https://imageio.forbes.com/specials-images/imageserve/5d35eacaf1176b0008974b54/2020-Chevrolet-Corvette-Stingray/0x0.jpg?format=jpg&crop=4560,2565,x790,y784,safe&width=960",
+              point: 4,
+            },
+            {
+              name: "bb",
+              image:
+                "https://cdn.motor1.com/images/mgl/NGGZon/s3/koenigsegg-gemera.jpg",
+              point: 2,
+            },
+            {
+              name: "cc",
+              image:
+                "https://media.product.which.co.uk/prod/images/original/222f4a4449ce-best-cars-inline2.jpg",
+              point: 1,
+            },
+            {
+              name: "dd",
+              image:
+                "https://hips.hearstapps.com/hmg-prod/images/2024-10best-cadillac-ct5-v-blackwing-656e54ae7ba4a.jpg?crop=1xw:0.8888333333333334xh;center,top&resize=2048:*",
+              point: 0,
+            },
+          ],
+        },
+        {
+          title: "Son Alınan Hizmetler",
+          order: 1,
+          station: [
+            {
+              name: "yy",
+              image:
+                "https://media.product.which.co.uk/prod/images/original/222f4a4449ce-best-cars-inline2.jpg",
+              point: 1,
+            },
+            {
+              name: "gg",
+              image:
+                "https://cdn.motor1.com/images/mgl/mrz1e/s1/coolest-cars-feature.webp",
+              point: 4,
+            },
+            {
+              name: "ff",
+              image:
+                "https://cdn.motor1.com/images/mgl/NGGZon/s3/koenigsegg-gemera.jpg",
+              point: 5,
+            },
+            {
+              name: "qq",
+              image:
+                "https://cfx-wp-images.imgix.net/2022/05/2022-Dodge-Challenger-Copy-scaled.jpg?auto=compress%2Cformat&ixlib=php-3.3.1&s=4c7ab559e27d6425ba449ffe8a0c62b5",
+              point: 2,
+            },
+            {
+              name: "ss",
+              image:
+                "https://hips.hearstapps.com/hmg-prod/images/2024-10best-cadillac-ct5-v-blackwing-656e54ae7ba4a.jpg?crop=1xw:0.8888333333333334xh;center,top&resize=2048:*",
+              point: 3,
+            },
+            {
+              name: "dd",
+              image:
+                "https://imageio.forbes.com/specials-images/imageserve/5d35eacaf1176b0008974b54/2020-Chevrolet-Corvette-Stingray/0x0.jpg?format=jpg&crop=4560,2565,x790,y784,safe&width=960",
+              point: 0,
+            },
+            {
+              name: "eeeeeeeeee",
+              image:
+                "https://imageio.forbes.com/specials-images/imageserve/5d35eacaf1176b0008974b54/2020-Chevrolet-Corvette-Stingray/0x0.jpg?format=jpg&crop=4560,2565,x790,y784,safe&width=960",
+              point: 5,
+            },
+          ],
+        },
+        {
+          title: "Haftanın En'leri",
+          order: 2,
+          station: [
+            {
+              name: "uu",
+              image:
+                "https://cdn.motor1.com/images/mgl/NGGZon/s3/koenigsegg-gemera.jpg",
+              point: 5,
+            },
+            {
+              name: "kk",
+              image:
+                "https://imageio.forbes.com/specials-images/imageserve/5d35eacaf1176b0008974b54/2020-Chevrolet-Corvette-Stingray/0x0.jpg?format=jpg&crop=4560,2565,x790,y784,safe&width=960",
+              point: 5,
+            },
+            {
+              name: "jj",
+              image:
+                "https://hips.hearstapps.com/hmg-prod/images/2024-10best-cadillac-ct5-v-blackwing-656e54ae7ba4a.jpg?crop=1xw:0.8888333333333334xh;center,top&resize=2048:*",
+              point: 3,
+            },
+            {
+              name: "hh",
+              image:
+                "https://cdn.motor1.com/images/mgl/mrz1e/s1/coolest-cars-feature.webp",
+              point: 3,
+            },
+            {
+              name: "nn",
+              image:
+                "https://cfx-wp-images.imgix.net/2022/05/2022-Dodge-Challenger-Copy-scaled.jpg?auto=compress%2Cformat&ixlib=php-3.3.1&s=4c7ab559e27d6425ba449ffe8a0c62b5",
+              point: 2,
+            },
+          ],
+        },
+      ],
     },
   };
 
@@ -129,6 +246,7 @@ export default function Home() {
           Kampanyalar
         </Text>
         <CampaignsSide response={response} />
+        <StationsSide response={response} />
       </Flex>
     </main>
   );

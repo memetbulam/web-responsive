@@ -15,5 +15,6 @@ export const chakraUiTheme = extendTheme({
     mainGreen: "#38A169",
     activeGreen: "#2F855A",
     mainGray: "#EDF2F7",
+    activeGray: "#718096",
   },
 });
