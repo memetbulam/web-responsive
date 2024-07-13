@@ -7,6 +7,7 @@ import Menu from "@/components/Menu";
 import StationsSide from "@/components/StationsSide";
 import StoriesSide from "@/components/StoriesSide";
 import { Flex, Text } from "@chakra-ui/react";
+import Layout from "@/components/Layout";
 
 export default function Home() {
   const [searchValue, setSearchValue] = useState("");
@@ -222,7 +223,7 @@ export default function Home() {
   };
 
   return (
-    <main>
+    <Layout>
       <Flex
         ref={containerRef}
         flexDirection={"column"}
@@ -251,6 +252,6 @@ export default function Home() {
         <CampaignsSide response={response} />
         <StationsSide response={response} />
       </Flex>
-    </main>
+    </Layout>
   );
 }
