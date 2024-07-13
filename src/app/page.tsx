@@ -1,6 +1,7 @@
 "use client";
 
 import SearchInput from "@/components/form-elements/SearchInput";
+import Menu from "@/components/Menu";
 import StoriesSide from "@/components/StoriesSide";
 import { Flex } from "@chakra-ui/react";
 import { useRef } from "react";
@@ -55,6 +56,16 @@ export default function Home() {
           url: "https://buffer.com/cdn-cgi/image/w=1000,fit=contain,q=90,f=auto/library/content/images/size/w600/2023/10/free-images.jpg",
         },
       ],
+      menu: [
+        { id: "aa", title: "Otopark" },
+        { id: "ss", title: "Vale Noktaları" },
+        { id: "dd", title: "Oto Yıkama" },
+        { id: "ww", title: "Oto Kuaför" },
+        { id: "ff", title: "Lastik" },
+        { id: "tt", title: "Servis" },
+        { id: "gg", title: "Ekspertiz" },
+        { id: "hh", title: "Şarj" },
+      ],
     },
   };
 
@@ -78,6 +89,7 @@ export default function Home() {
       >
         <StoriesSide response={response} />
         <SearchInput placeholder="Arama yap" />
+        <Menu response={response} />
       </Flex>
     </main>
   );

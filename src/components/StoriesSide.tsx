@@ -19,6 +19,10 @@ interface Props {
         type: string;
         url: string;
       }[];
+      menu: {
+        id: string;
+        title: string;
+      }[];
     };
   };
 }
