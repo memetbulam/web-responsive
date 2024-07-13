@@ -1,4 +1,5 @@
 "use client";
+import SliderContextProvider from "@/contexts/useSliderContext";
 import { chakraUiTheme } from "@/utils/theme";
 import { ChakraProvider } from "@chakra-ui/react";
 import React, { FC } from "react";
@@ -10,7 +11,9 @@ interface Props {
 const Providers: FC<Props> = ({ children }) => {
   return (
     <body>
-      <ChakraProvider theme={chakraUiTheme}>{children}</ChakraProvider>
+      <ChakraProvider theme={chakraUiTheme}>
+        <SliderContextProvider>{children}</SliderContextProvider>
+      </ChakraProvider>
     </body>
   );
 };

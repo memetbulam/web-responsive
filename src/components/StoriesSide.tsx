@@ -139,7 +139,7 @@ const StoriesSide: FC<Props> = ({ response }) => {
                 maxH={{ base: "70px", sm: "90px", md: "100px", lg: "100px" }}
                 borderRadius={"50%"}
                 src={story.url}
-                draggable={"false"}
+                draggable={false}
                 alt={story.id}
                 _hover={{ opacity: 0.7 }}
                 transition={"opacity 0.3s"}

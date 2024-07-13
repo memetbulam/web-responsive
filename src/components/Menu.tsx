@@ -59,7 +59,7 @@ const Menu: FC<Props> = ({ response }) => {
               borderRadius: "16px",
               textAlign: "center",
               backgroundColor:
-                isHovered.key === menu.id
+                isHovered.key === menu.id && isHovered.value
                   ? chakraUiTheme?.colors.mainGreen
                   : chakraUiTheme?.colors.mainGray,
               transition: "background-color 0.3s",
