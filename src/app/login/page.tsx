@@ -1,12 +1,25 @@
 "use client";
+import useDataFetch from "@/hooks/useDataFetch";
+import { urls } from "@/utils/urls";
 import { Box, Button, Flex, Input, Text } from "@chakra-ui/react";
-import React, { useState } from "react";
+import React, { useCallback, useState } from "react";
 
 const Login = () => {
   const [inputValues, setInputValues] = useState({
     userName: "",
-    passowrd: "",
+    password: "",
   });
+
+  const { action, errorMessage, isLoading } = useDataFetch({
+    url: urls.login,
+    method: "post",
+    payload: inputValues,
+  });
+
+  const handleLoginClick = useCallback(async () => {
+    return await action();
+  }, [action]);
+
   return (
     <Flex
       width={"100dvw"}
@@ -69,12 +82,12 @@ const Login = () => {
           />
           <Input
             placeholder="Şifrenizi yazınız"
-            value={inputValues.passowrd}
+            value={inputValues.password}
             type="password"
             onChange={(e) =>
               setInputValues((prev) => ({
                 ...prev,
-                passowrd: e.target.value,
+                password: e.target.value,
               }))
             }
           />
@@ -89,6 +102,8 @@ const Login = () => {
               backgroundColor: "green.600",
             }}
             transition={"background-color 0.3s"}
+            disabled={isLoading}
+            onClick={handleLoginClick}
           >
             Giriş Yap
           </Button>
