@@ -1,9 +1,10 @@
 import { chakraUiTheme } from "@/utils/theme";
 import { Box, Flex, useBreakpointValue } from "@chakra-ui/react";
 import Link from "next/link";
-import React, { FC, useState } from "react";
+import React, { FC, useMemo, useState } from "react";
 
 interface Props {
+  searchValue: string;
   response: {
     code: number;
     data: {
@@ -21,7 +22,7 @@ interface Props {
   };
 }
 
-const Menu: FC<Props> = ({ response }) => {
+const Menu: FC<Props> = ({ response, searchValue }) => {
   const [isHovered, setIsHovered] = useState({ key: "", value: false });
   const widthAndHeightResponsiveValue = useBreakpointValue({
     base: "90px",
@@ -36,6 +37,12 @@ const Menu: FC<Props> = ({ response }) => {
     md: "16px",
   });
 
+  const searchedData = useMemo(() => {
+    return response?.data?.menu?.filter((item) =>
+      item.title.toLowerCase().includes(searchValue?.toLowerCase())
+    );
+  }, [response?.data?.menu, searchValue]);
+
   return (
     <Flex
       gap={"16px"}
@@ -43,38 +50,44 @@ const Menu: FC<Props> = ({ response }) => {
       margin={"16px 20px 20px 20px"}
       flexWrap={"wrap"}
     >
-      {response.data.menu.map((menu) => {
-        return (
-          <Link
-            key={menu.id}
-            href={`/${menu?.title?.replaceAll(" ", "-").toLocaleLowerCase()}`}
-            style={{
-              display: "flex",
-              justifyContent: "center",
-              alignItems: "center",
-              width: widthAndHeightResponsiveValue,
-              height: widthAndHeightResponsiveValue,
-              fontSize: fontSizeResponsiveValue,
-              padding: "6px",
-              borderRadius: "16px",
-              textAlign: "center",
-              backgroundColor:
-                isHovered.key === menu.id && isHovered.value
-                  ? chakraUiTheme?.colors.mainGreen
-                  : chakraUiTheme?.colors.mainGray,
-              transition: "background-color 0.3s",
-            }}
-            onMouseEnter={() => {
-              setIsHovered({ key: menu.id, value: true });
-            }}
-            onMouseLeave={() => {
-              setIsHovered({ key: menu.id, value: false });
-            }}
-          >
-            {menu.title}
-          </Link>
-        );
-      })}
+      {searchedData?.length ? (
+        searchedData.map((menu) => {
+          return (
+            <Link
+              key={menu.id}
+              href={`/${menu?.title?.replaceAll(" ", "-").toLocaleLowerCase()}`}
+              style={{
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center",
+                width: widthAndHeightResponsiveValue,
+                height: widthAndHeightResponsiveValue,
+                fontSize: fontSizeResponsiveValue,
+                padding: "6px",
+                borderRadius: "16px",
+                textAlign: "center",
+                backgroundColor:
+                  isHovered.key === menu.id && isHovered.value
+                    ? chakraUiTheme?.colors.mainGreen
+                    : chakraUiTheme?.colors.mainGray,
+                transition: "background-color 0.3s",
+              }}
+              onMouseEnter={() => {
+                setIsHovered({ key: menu.id, value: true });
+              }}
+              onMouseLeave={() => {
+                setIsHovered({ key: menu.id, value: false });
+              }}
+            >
+              {menu.title}
+            </Link>
+          );
+        })
+      ) : (
+        <Flex justifyContent={"center"} alignItems={"center"} height={"120px"}>
+          Sonuç bulunamadı
+        </Flex>
+      )}
     </Flex>
   );
 };

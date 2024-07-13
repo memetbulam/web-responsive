@@ -1,16 +1,16 @@
 "use client";
 
+import { useRef, useState } from "react";
 import CampaignsSide from "@/components/CampaignsSide";
 import SearchInput from "@/components/form-elements/SearchInput";
 import Menu from "@/components/Menu";
 import StationsSide from "@/components/StationsSide";
 import StoriesSide from "@/components/StoriesSide";
 import { Flex, Text } from "@chakra-ui/react";
-import { useRef } from "react";
 
 export default function Home() {
+  const [searchValue, setSearchValue] = useState("");
   const containerRef = useRef(null);
-
   const response = {
     code: 100,
     data: {
@@ -240,8 +240,11 @@ export default function Home() {
         overflowY={"auto"}
       >
         <StoriesSide response={response} />
-        <SearchInput placeholder="Arama yap" />
-        <Menu response={response} />
+        <SearchInput
+          placeholder="Arama yap"
+          onChange={(e) => setSearchValue(e.target.value)}
+        />
+        <Menu response={response} searchValue={searchValue} />
         <Text fontSize={{ base: "16px", lg: "18px" }} fontWeight={"bold"}>
           Kampanyalar
         </Text>

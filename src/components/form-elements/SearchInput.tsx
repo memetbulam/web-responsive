@@ -32,7 +32,7 @@ const SearchInput: FC<Props> = ({
           width: "22px",
           height: "22px",
           position: "absolute",
-          left: "34px",
+          left: "12px",
           top: "12px",
           zIndex: 10,
           fill: isInputFocused ? chakraUiTheme.colors.activeGreen : "black",
@@ -40,7 +40,6 @@ const SearchInput: FC<Props> = ({
         }}
       />
       <Input
-        margin={"0px 20px"}
         paddingLeft={"42px"}
         backgroundColor={"gray.100"}
         borderRadius={"20px"}
