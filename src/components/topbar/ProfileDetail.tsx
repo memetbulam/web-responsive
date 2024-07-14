@@ -4,8 +4,10 @@ import OutSideWrapper from "../OutSideWrapper";
 import UserIcon from "../icons/UserIcon";
 import { useRouter } from "next/navigation";
 import Cookies from "js-cookie";
+import { chakraUiTheme } from "@/utils/theme";
 
 interface Props {
+  isMobile?: boolean;
   isProfileButtonClicked: boolean;
   setIsProfileButtonClicked: Dispatch<SetStateAction<boolean>>;
 }
@@ -13,6 +15,7 @@ interface Props {
 const ProfileDetail: FC<Props> = ({
   isProfileButtonClicked,
   setIsProfileButtonClicked,
+  isMobile = false,
 }) => {
   const router = useRouter();
   const userInfo: { userName: string } = JSON.parse(
@@ -26,7 +29,7 @@ const ProfileDetail: FC<Props> = ({
     >
       <Flex
         position={"absolute"}
-        bottom={"-160px"}
+        bottom={isMobile ? "74px" : "-194px"}
         right={"0px"}
         flexDirection={"column"}
         opacity={isProfileButtonClicked ? 1 : 0}
@@ -40,6 +43,7 @@ const ProfileDetail: FC<Props> = ({
         overflow={"hidden"}
         padding={"10px"}
         gap={"20px"}
+        boxShadow={`0px 0px 10px ${chakraUiTheme.colors.mainGray}`}
         transition={"opacity 0.3s, visibility 0.3s"}
       >
         <Flex alignItems={"center"} gap={"10px"}>
