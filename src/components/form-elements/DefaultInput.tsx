@@ -26,6 +26,7 @@ const DefaultInput: FC<Props> = ({
       value={value}
       type={type}
       onChange={onChange}
+      _focus={{ borderColor: "activeGreen" }}
       {...inputProps}
     />
   );

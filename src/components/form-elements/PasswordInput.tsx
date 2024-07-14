@@ -71,6 +71,7 @@ const PasswordInput: FC<Props> = ({
         placeholder={placeholder}
         type={inputType}
         onChange={onChange}
+        _focus={{ borderColor: "activeGreen" }}
       />
     </Box>
   );
