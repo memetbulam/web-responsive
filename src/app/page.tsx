@@ -38,9 +38,6 @@ export default function Home() {
           onChange={(e) => setSearchValue(e.target.value)}
         />
         <Menu menuData={response?.data?.menu} searchValue={searchValue} />
-        <Text fontSize={{ base: "16px", lg: "18px" }} fontWeight={"bold"}>
-          Kampanyalar
-        </Text>
         <CampaignsSide sliderData={response?.data?.slider} />
         <StationsSide stationsData={response?.data?.stations} />
       </Flex>

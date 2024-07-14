@@ -1,4 +1,3 @@
-import { useBreakpoint, useBreakpointValue } from "@chakra-ui/react";
 import {
   createContext,
   Dispatch,
@@ -10,35 +9,23 @@ import {
 } from "react";
 
 interface Props {
-  sliderTranslateXValue: number;
-  setSliderTranslateXValue: Dispatch<SetStateAction<number>>;
-  sliderResponsiveDraggableValue: number;
+  currentImageIndex: number;
+  setCurrentImageIndex: Dispatch<SetStateAction<number>>;
 }
 
 const SliderContext = createContext<Props>({
-  sliderTranslateXValue: 0,
-  setSliderTranslateXValue: () => {},
-  sliderResponsiveDraggableValue: 584,
+  currentImageIndex: 0,
+  setCurrentImageIndex: () => {},
 });
 
 const SliderContextProvider: FC<{ children: ReactNode }> = ({ children }) => {
-  const [sliderTranslateXValue, setSliderTranslateXValue] = useState<number>(0);
-  const a = useBreakpoint();
-  const sliderResponsiveDraggableValue = useBreakpointValue({
-    base: 258,
-    sm: 460,
-    md: 596,
-    lg: 454,
-    xl: 454,
-    "2xl": 584,
-  }) as number;
+  const [currentImageIndex, setCurrentImageIndex] = useState<number>(0);
 
   return (
     <SliderContext.Provider
       value={{
-        sliderTranslateXValue,
-        setSliderTranslateXValue,
-        sliderResponsiveDraggableValue,
+        currentImageIndex,
+        setCurrentImageIndex,
       }}
     >
       {children}

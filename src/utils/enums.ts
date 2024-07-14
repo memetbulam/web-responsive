@@ -25,3 +25,8 @@ export enum ChakraUiAlertStatus {
   Warning = "warning",
   Loading = "loading",
 }
+
+export enum SliderButtonDirection {
+  Left = "left",
+  Right = "right",
+}

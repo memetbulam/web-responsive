@@ -1,56 +1,119 @@
-import { Flex, useBreakpoint } from "@chakra-ui/react";
-import React, { FC, useMemo, useState } from "react";
+import React, { FC, useCallback, useEffect, useMemo, useState } from "react";
+import { Box, Flex, useBreakpoint } from "@chakra-ui/react";
 import LeftArrowIcon from "./icons/LeftArrowIcon";
 import { chakraUiTheme } from "@/utils/theme";
 import { useSliderContext } from "@/contexts/useSliderContext";
-import { breakpointsValues } from "@/utils/enums";
+import { breakpointsValues, SliderButtonDirection } from "@/utils/enums";
 
 interface Props {
-  buttonDirection: string;
-  dataLength: number;
+  isMobileButton?: boolean;
+  buttonDirection?: SliderButtonDirection;
+  sliderDataLength: number;
 }
 
-const SiliderButton: FC<Props> = ({ buttonDirection, dataLength }) => {
-  const currentBreakpointValue = useBreakpoint();
-  const { setSliderTranslateXValue, sliderResponsiveDraggableValue } =
-    useSliderContext();
+const SiliderButton: FC<Props> = ({
+  buttonDirection,
+  sliderDataLength,
+  isMobileButton = false,
+}) => {
+  const { currentImageIndex, setCurrentImageIndex } = useSliderContext();
+  const currentBreakpoint = useBreakpoint();
   const [isSliderHovered, setIsSliderHovered] = useState({
     direction: "",
     value: false,
   });
-
   const isLeftButton = useMemo(
-    () => buttonDirection === "left",
+    () => buttonDirection === SliderButtonDirection.Left,
     [buttonDirection]
   );
 
+  const handleNextClick = useCallback(() => {
+    if (
+      currentBreakpoint === breakpointsValues.Base ||
+      currentBreakpoint === breakpointsValues.Sm
+    ) {
+      const index =
+        currentImageIndex === sliderDataLength - 1 ? 0 : currentImageIndex + 1;
+      setCurrentImageIndex(index);
+      return;
+    }
+    const index =
+      currentImageIndex === sliderDataLength - 2 ? 0 : currentImageIndex + 1;
+    setCurrentImageIndex(index);
+  }, [
+    currentBreakpoint,
+    currentImageIndex,
+    setCurrentImageIndex,
+    sliderDataLength,
+  ]);
+
+  const handlePrevClick = useCallback(() => {
+    if (
+      currentBreakpoint === breakpointsValues.Base ||
+      currentBreakpoint === breakpointsValues.Sm
+    ) {
+      const index =
+        currentImageIndex === 0 ? sliderDataLength - 1 : currentImageIndex - 1;
+      setCurrentImageIndex(index);
+      return;
+    }
+    const index =
+      currentImageIndex === 0 ? sliderDataLength - 2 : currentImageIndex - 1;
+    setCurrentImageIndex(index);
+  }, [
+    currentBreakpoint,
+    currentImageIndex,
+    setCurrentImageIndex,
+    sliderDataLength,
+  ]);
+
+  const handleDotClick = useCallback(
+    (index: number) => {
+      setCurrentImageIndex(index);
+    },
+    [setCurrentImageIndex]
+  );
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      handleNextClick();
+    }, 5000);
+
+    return () => clearInterval(interval);
+  }, [currentImageIndex, handleNextClick]);
+
   if (
-    currentBreakpointValue === breakpointsValues.Sm ||
-    currentBreakpointValue === breakpointsValues.Base
+    (isMobileButton && currentBreakpoint === breakpointsValues.Base) ||
+    currentBreakpoint === breakpointsValues.Sm
   ) {
     return (
-      <Flex
+      <Box
+        textAlign={"center"}
         position={"absolute"}
-        bottom={"32px"}
-        left={"50%"}
-        gap={"6px"}
-        transform={"translateX(-50%)"}
+        left={"0px"}
+        right={"0px"}
+        bottom={"10px"}
         zIndex={10}
+        userSelect={"none"}
       >
-        {Array(dataLength)
+        {Array(sliderDataLength)
           .fill(0)
-          .map((_, index) => {
-            return (
-              <Flex
-                key={index}
-                width={"12px"}
-                height={"12px"}
-                borderRadius={"50%"}
-                backgroundColor={"gray.100"}
-              />
-            );
-          })}
-      </Flex>
+          .map((_, index) => (
+            <Box
+              key={index}
+              height={"14px"}
+              width={"14px"}
+              margin={"0px 4px"}
+              backgroundColor={
+                currentImageIndex === index ? "activeGreen" : "activeGray"
+              }
+              borderRadius={"50%"}
+              display={"inline-block"}
+              cursor={"pointer"}
+              onClick={() => handleDotClick(index)}
+            />
+          ))}
+      </Box>
     );
   }
 
@@ -67,37 +130,20 @@ const SiliderButton: FC<Props> = ({ buttonDirection, dataLength }) => {
       zIndex={10}
       transform={!isLeftButton ? "rotate(180deg)" : undefined}
       borderLeftRadius={"20px"}
-      background={
-        "linear-gradient(270deg, rgba(2,0,36,0) 0%, rgba(237,242,247,1) 75%)"
-      }
+      background={"transparent"}
+      userSelect={"none"}
     >
       <LeftArrowIcon
         onMouseEnter={() => {
-          setIsSliderHovered({ direction: "left", value: true });
+          setIsSliderHovered({
+            direction: SliderButtonDirection.Left,
+            value: true,
+          });
         }}
         onMouseLeave={() => {
-          setIsSliderHovered({ direction: "left", value: false });
-        }}
-        onClick={() => {
-          setSliderTranslateXValue((prev) => {
-            const rightMovementMaxValue =
-              currentBreakpointValue === breakpointsValues.Md ||
-              currentBreakpointValue === breakpointsValues.Sm ||
-              currentBreakpointValue === breakpointsValues.Base
-                ? -sliderResponsiveDraggableValue * (dataLength - 2) <= prev &&
-                  !isLeftButton
-                : -sliderResponsiveDraggableValue * (dataLength - 3) <= prev &&
-                  !isLeftButton;
-
-            if (prev === 0 && isLeftButton) {
-              return 0;
-            } else if (isLeftButton) {
-              return prev + sliderResponsiveDraggableValue;
-            } else if (rightMovementMaxValue) {
-              return prev - sliderResponsiveDraggableValue;
-            } else {
-              return prev;
-            }
+          setIsSliderHovered({
+            direction: SliderButtonDirection.Left,
+            value: false,
           });
         }}
         style={{
@@ -105,11 +151,17 @@ const SiliderButton: FC<Props> = ({ buttonDirection, dataLength }) => {
           height: "50px",
           cursor: "pointer",
           fill:
-            isSliderHovered?.direction === "left" && isSliderHovered?.value
+            isSliderHovered?.direction === SliderButtonDirection.Left &&
+            isSliderHovered?.value
               ? chakraUiTheme.colors.activeGreen
               : "black",
           transition: "fill 0.3s",
         }}
+        onClick={
+          buttonDirection === SliderButtonDirection.Left
+            ? handlePrevClick
+            : handleNextClick
+        }
       />
     </Flex>
   );

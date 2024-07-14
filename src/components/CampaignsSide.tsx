@@ -1,120 +1,92 @@
-import React, { FC, useEffect, useMemo } from "react";
-import { Box, Flex, Image, useBreakpoint } from "@chakra-ui/react";
+import React, { FC, useMemo } from "react";
+import { Box, Flex, Image, useBreakpoint, Text } from "@chakra-ui/react";
 import SiliderButton from "./SiliderButton";
 import { useSliderContext } from "@/contexts/useSliderContext";
-import { breakpointsValues } from "@/utils/enums";
 import { SliderData } from "@/utils/types";
+import { breakpointsValues, SliderButtonDirection } from "@/utils/enums";
 
 interface Props {
   sliderData: SliderData[];
 }
 const CampaignsSide: FC<Props> = ({ sliderData }) => {
-  const {
-    sliderTranslateXValue,
-    setSliderTranslateXValue,
-    sliderResponsiveDraggableValue,
-  } = useSliderContext();
-  const currentBreakpointValue = useBreakpoint();
+  const { currentImageIndex } = useSliderContext();
+  const currentBreakpoint = useBreakpoint();
+  const sliderMovementValue = useMemo(() => {
+    if (
+      currentBreakpoint === breakpointsValues.Base ||
+      currentBreakpoint === breakpointsValues.Sm
+    ) {
+      return {
+        transform: `translateX(-${currentImageIndex * 100}%)`,
+        minWidth: "calc(100% - 16px)",
+      };
+    }
 
-  const dataLength = useMemo(() => sliderData?.length, [sliderData?.length]);
-
-  useEffect(() => {
-    const sliderInterval = setInterval(() => {
-      setSliderTranslateXValue((prev) => {
-        const rightMovementMaxValue =
-          currentBreakpointValue === breakpointsValues.Md ||
-          currentBreakpointValue === breakpointsValues.Sm ||
-          currentBreakpointValue === breakpointsValues.Base
-            ? prev === -sliderResponsiveDraggableValue * (dataLength - 1)
-            : prev === -sliderResponsiveDraggableValue * (dataLength - 2);
-        if (rightMovementMaxValue) {
-          return 0;
-        }
-        return prev - sliderResponsiveDraggableValue;
-      });
-    }, 3000);
-
-    return () => clearInterval(sliderInterval);
-  }, [
-    currentBreakpointValue,
-    dataLength,
-    setSliderTranslateXValue,
-    sliderResponsiveDraggableValue,
-  ]);
+    return {
+      transform: `translateX(-${currentImageIndex * 50}%)`,
+      minWidth: "calc(50% - 16px)",
+    };
+  }, [currentBreakpoint, currentImageIndex]);
 
   return (
-    <Box position={"relative"}>
-      <Flex
-        gap={"16px"}
-        userSelect={"none"}
-        margin={"10px 20px"}
+    <>
+      <Text
+        fontSize={{ base: "16px", lg: "18px" }}
+        fontWeight={"bold"}
+        marginBottom={"8px"}
+      >
+        Kampanyalar
+      </Text>
+      <Box
+        position={"relative"}
+        width={"100%"}
+        maxWidth={"100%"}
+        margin={"auto"}
         overflow={"hidden"}
       >
-        {sliderData?.map((slider) => {
-          return (
-            <Box
-              key={slider.id}
-              backgroundColor={"gray.100"}
-              borderRadius={"20px"}
-              padding={{
-                base: "12px",
-                sm: "12px",
-                md: "16px 20px",
-              }}
-              transform={`translateX(${sliderTranslateXValue}px)`}
-              transition={"transform 0.3s"}
-            >
-              <Image
-                minWidth={{
-                  base: "220px",
-                  sm: "420px",
-                  md: "540px",
-                  lg: "400px",
-                  xl: "400px",
-                  "2xl": "530px",
-                }}
-                maxWidth={{
-                  base: "220px",
-                  sm: "420px",
-                  md: "540px",
-                  lg: "400px",
-                  xl: "400px",
-                  "2xl": "530px",
-                }}
-                minHeight={{
-                  base: "160px",
-                  sm: "220px",
-                  md: "240px",
-                  lg: "220px",
-                  xl: "220px",
-                  "2xl": "250px",
-                }}
-                maxHeight={{
-                  base: "160px",
-                  sm: "220px",
-                  md: "240px",
-                  lg: "220px",
-                  xl: "220px",
-                  "2xl": "250px",
-                }}
+        <Flex
+          transition={"transform 0.5s"}
+          gap={"16px"}
+          transform={sliderMovementValue?.transform}
+        >
+          {sliderData?.map((slider, index) => {
+            const firstIndex = index === 0;
+            return (
+              <Box
+                key={slider.id}
+                minWidth={sliderMovementValue?.minWidth}
+                boxSizing="border-box"
+                backgroundColor={"gray.100"}
                 borderRadius={"20px"}
-                draggable={false}
-                src={slider.url}
-                alt={slider.id}
-              />
-            </Box>
-          );
-        })}
+                marginLeft={firstIndex ? "8px" : "0px"}
+                padding={{
+                  base: "12px",
+                  sm: "12px",
+                  md: "16px 20px",
+                }}
+                transition={"transform 0.3s"}
+              >
+                <Image
+                  borderRadius={"20px"}
+                  draggable={false}
+                  src={slider.url}
+                  alt={slider.id}
+                />
+              </Box>
+            );
+          })}
+        </Flex>
         <SiliderButton
-          buttonDirection={"left"}
-          dataLength={sliderData.length}
+          buttonDirection={SliderButtonDirection.Left}
+          sliderDataLength={sliderData.length}
         />
         <SiliderButton
-          buttonDirection={"right"}
-          dataLength={sliderData.length}
+          buttonDirection={SliderButtonDirection.Right}
+          sliderDataLength={sliderData.length}
         />
-      </Flex>
-    </Box>
+        <SiliderButton isMobileButton sliderDataLength={sliderData.length} />
+      </Box>
+    </>
   );
 };
 
