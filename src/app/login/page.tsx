@@ -1,7 +1,5 @@
 "use client";
 import React, { FormEventHandler, useCallback, useState } from "react";
-import useDataFetch from "@/hooks/useDataFetch";
-import { urls } from "@/utils/urls";
 import { Button, Flex, Text } from "@chakra-ui/react";
 import { useRouter } from "next/navigation";
 import Cookies from "js-cookie";
@@ -23,12 +21,6 @@ const Login = () => {
   });
 
   const router = useRouter();
-
-  const { action, errorMessage, isLoading } = useDataFetch({
-    url: urls.login,
-    method: "post",
-    payload: inputValues,
-  });
 
   const handleLoginClick: FormEventHandler<HTMLFormElement> = useCallback(
     async (e) => {
@@ -155,7 +147,6 @@ const Login = () => {
               backgroundColor: "green.600",
             }}
             transition={"background-color 0.3s"}
-            disabled={isLoading}
           >
             Giriş Yap
           </Button>
