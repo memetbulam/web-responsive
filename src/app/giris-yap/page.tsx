@@ -9,7 +9,7 @@ import { ApiStatusCode, ChakraUiAlertStatus, InputTypes } from "@/utils/enums";
 import { ChakraUiAlertState, LoginApiResponse } from "@/utils/types";
 import CustomAlert from "@/components/CustomAlert";
 
-const Login = () => {
+const Page = () => {
   const [inputValues, setInputValues] = useState({
     userName: "",
     password: "",
@@ -157,4 +157,4 @@ const Login = () => {
   );
 };
 
-export default Login;
+export default Page;

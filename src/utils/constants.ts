@@ -186,13 +186,13 @@ export const topbarMenu = [
     key: "myCart",
     title: "Sepetim",
     icon: CartShoppingIcon,
-    path: "/",
+    path: "/sepetim",
   },
   {
     key: "myCars",
     title: "Araçlarım",
     icon: CarIcon,
-    path: "/",
+    path: "/araclarim",
   },
   {
     key: "profile",

@@ -17,8 +17,8 @@ const Providers: FC<Props> = ({ children }) => {
   const token = Cookies.get("token");
 
   useEffect(() => {
-    if (!token && pathName !== "/login") {
-      router.push("/login");
+    if (!token && pathName !== "/giris-yap") {
+      router.push("/giris-yap");
     } else {
       setIsLoading(false);
     }

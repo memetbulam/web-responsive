@@ -5,6 +5,7 @@ import { Box, Flex, useBreakpoint } from "@chakra-ui/react";
 import Link from "next/link";
 import ProfileDetail from "../topbar/ProfileDetail";
 import { breakpointsValues } from "@/utils/enums";
+import { usePathname } from "next/navigation";
 
 const Footerbar = () => {
   const [isMenuHovered, setIsMenuHovered] = useState<{
@@ -16,6 +17,7 @@ const Footerbar = () => {
   });
   const [isProfileButtonClicked, setIsProfileButtonClicked] = useState(false);
   const currentBreakpointValue = useBreakpoint();
+  const pathName = usePathname();
 
   if (
     currentBreakpointValue === breakpointsValues.Base ||
@@ -39,6 +41,9 @@ const Footerbar = () => {
           <Box as="ul" display={"flex"} position={"relative"}>
             {topbarMenu.map(({ key, icon: Icon, path, title }, index) => {
               const lastIndex = topbarMenu.length - 1 === index;
+              const activeLink =
+                (isMenuHovered.key === key && isMenuHovered.value) ||
+                pathName === path;
               return (
                 <Box
                   key={key}
@@ -56,10 +61,9 @@ const Footerbar = () => {
                       gap: "4px",
                       fontWeight: "500",
                       marginRight: lastIndex ? "0px" : "20px",
-                      color:
-                        isMenuHovered.key === key && isMenuHovered.value
-                          ? chakraUiTheme.colors.activeGreen
-                          : "black",
+                      color: activeLink
+                        ? chakraUiTheme.colors.activeGreen
+                        : "black",
                       transition: "color 0.3s",
                     }}
                     onMouseEnter={() => {
@@ -79,9 +83,7 @@ const Footerbar = () => {
                       height={"20px"}
                       style={{ transition: "fill 0.3s", fontSize: "12px" }}
                       fill={
-                        isMenuHovered.key === key && isMenuHovered.value
-                          ? chakraUiTheme.colors.activeGreen
-                          : "black"
+                        activeLink ? chakraUiTheme.colors.activeGreen : "black"
                       }
                     />
                     {title}
