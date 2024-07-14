@@ -42,3 +42,9 @@ export type ApiResponse = {
     stations: StationsData[];
   };
 };
+
+export type LoginApiResponse = {
+  code: 100 | 101;
+  token: string;
+  message: string;
+};

@@ -5,6 +5,10 @@ import { urls } from "@/utils/urls";
 import { Button, Flex, Input, Text } from "@chakra-ui/react";
 import { useRouter } from "next/navigation";
 import Cookies from "js-cookie";
+import DefaultInput from "@/components/form-elements/DefaultInput";
+import PasswordInput from "@/components/form-elements/PasswordInput";
+import { InputTypes } from "@/utils/enums";
+import { LoginApiResponse } from "@/utils/types";
 
 const Login = () => {
   const [inputValues, setInputValues] = useState({
@@ -23,17 +27,23 @@ const Login = () => {
   const handleLoginClick: FormEventHandler<HTMLFormElement> = useCallback(
     async (e) => {
       e.preventDefault();
-      const response = {
-        code: 100,
-        token: "AhYmPkQvugWUSKyyODcAJLlsPzNLMJutAehWWoTdiTfGUydQQi",
-        message: "İşlem başarılı",
-      };
-
-      // const errorResponse: {
-      //   code: 101;
-      //   token: "";
-      //   message: "userName yada password hatalı";
-      // };
+      let response: LoginApiResponse;
+      if (
+        inputValues?.userName === "ziyaretci@otovinn.com" &&
+        inputValues?.password === "123456"
+      ) {
+        response = {
+          code: 100,
+          token: "AhYmPkQvugWUSKyyODcAJLlsPzNLMJutAehWWoTdiTfGUydQQi",
+          message: "İşlem başarılı",
+        };
+      } else {
+        response = {
+          code: 101,
+          token: "",
+          message: "userName yada password hatalı",
+        };
+      }
 
       if (response.code === 100) {
         Cookies.set("token", response.token);
@@ -46,9 +56,8 @@ const Login = () => {
         Cookies.remove("token");
         Cookies.remove("userInfo");
       }
-      // return await action();
     },
-    [inputValues.userName, router]
+    [inputValues?.password, inputValues.userName, router]
   );
 
   return (
@@ -100,24 +109,23 @@ const Login = () => {
           Giriş Yap
         </Text>
         <form onSubmit={handleLoginClick}>
-          <Input
+          <DefaultInput
             placeholder="Kullanıcı adınızı yazınız"
             required
             value={inputValues.userName}
-            type="email"
+            type={InputTypes.Email}
+            inputProps={{ marginBottom: "16px" }}
             onChange={(e) =>
               setInputValues((prev) => ({
                 ...prev,
                 userName: e.target.value,
               }))
             }
-            marginBottom={"16px"}
           />
-          <Input
-            placeholder="Şifrenizi yazınız"
+          <PasswordInput
             required
+            placeholder="Şifrenizi yazınız"
             value={inputValues.password}
-            type="password"
             onChange={(e) =>
               setInputValues((prev) => ({
                 ...prev,

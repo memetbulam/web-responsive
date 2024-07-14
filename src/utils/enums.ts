@@ -11,3 +11,9 @@ export enum StationHoveredIconKeys {
   Calendar = "calendar",
   Heart = "heart",
 }
+
+export enum InputTypes {
+  Text = "text",
+  Password = "password",
+  Email = "email",
+}
