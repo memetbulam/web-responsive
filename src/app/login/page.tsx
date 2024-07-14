@@ -1,8 +1,10 @@
 "use client";
+import React, { FormEventHandler, useCallback, useState } from "react";
 import useDataFetch from "@/hooks/useDataFetch";
 import { urls } from "@/utils/urls";
-import { Box, Button, Flex, Input, Text } from "@chakra-ui/react";
-import React, { useCallback, useState } from "react";
+import { Button, Flex, Input, Text } from "@chakra-ui/react";
+import { useRouter } from "next/navigation";
+import Cookies from "js-cookie";
 
 const Login = () => {
   const [inputValues, setInputValues] = useState({
@@ -10,15 +12,44 @@ const Login = () => {
     password: "",
   });
 
+  const router = useRouter();
+
   const { action, errorMessage, isLoading } = useDataFetch({
     url: urls.login,
     method: "post",
     payload: inputValues,
   });
 
-  const handleLoginClick = useCallback(async () => {
-    return await action();
-  }, [action]);
+  const handleLoginClick: FormEventHandler<HTMLFormElement> = useCallback(
+    async (e) => {
+      e.preventDefault();
+      const response = {
+        code: 100,
+        token: "AhYmPkQvugWUSKyyODcAJLlsPzNLMJutAehWWoTdiTfGUydQQi",
+        message: "İşlem başarılı",
+      };
+
+      // const errorResponse: {
+      //   code: 101;
+      //   token: "";
+      //   message: "userName yada password hatalı";
+      // };
+
+      if (response.code === 100) {
+        Cookies.set("token", response.token);
+        Cookies.set(
+          "userInfo",
+          JSON.stringify({ userName: inputValues.userName })
+        );
+        router.push("/");
+      } else if (response.code === 101) {
+        Cookies.remove("token");
+        Cookies.remove("userInfo");
+      }
+      // return await action();
+    },
+    [inputValues.userName, router]
+  );
 
   return (
     <Flex
@@ -68,10 +99,12 @@ const Login = () => {
         >
           Giriş Yap
         </Text>
-        <Box>
+        <form onSubmit={handleLoginClick}>
           <Input
             placeholder="Kullanıcı adınızı yazınız"
+            required
             value={inputValues.userName}
+            type="email"
             onChange={(e) =>
               setInputValues((prev) => ({
                 ...prev,
@@ -82,6 +115,7 @@ const Login = () => {
           />
           <Input
             placeholder="Şifrenizi yazınız"
+            required
             value={inputValues.password}
             type="password"
             onChange={(e) =>
@@ -92,7 +126,7 @@ const Login = () => {
             }
           />
           <Button
-            type="button"
+            type="submit"
             marginTop={"24px"}
             width={"100%"}
             backgroundColor={"green.500"}
@@ -103,11 +137,10 @@ const Login = () => {
             }}
             transition={"background-color 0.3s"}
             disabled={isLoading}
-            onClick={handleLoginClick}
           >
             Giriş Yap
           </Button>
-        </Box>
+        </form>
       </Flex>
     </Flex>
   );

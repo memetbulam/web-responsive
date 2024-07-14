@@ -70,7 +70,11 @@ const Menu: FC<Props> = ({ response, searchValue }) => {
                   isHovered.key === menu.id && isHovered.value
                     ? chakraUiTheme?.colors.mainGreen
                     : chakraUiTheme?.colors.mainGray,
-                transition: "background-color 0.3s",
+                color:
+                  isHovered.key === menu.id && isHovered.value
+                    ? "white"
+                    : "black",
+                transition: "background-color 0.3s, color 0.3s",
               }}
               onMouseEnter={() => {
                 setIsHovered({ key: menu.id, value: true });
