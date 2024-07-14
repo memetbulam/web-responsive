@@ -81,6 +81,8 @@ const StationsSide: FC<Props> = ({ response }) => {
                     <Image
                       width={"100px"}
                       height={"100px"}
+                      minWidth={"100px"}
+                      minHeight={"100px"}
                       borderRadius={"12px"}
                       draggable={false}
                       userSelect={"none"}
@@ -114,7 +116,19 @@ const StationsSide: FC<Props> = ({ response }) => {
                             />
                           ))}
                       </GridItem>
-                      <GridItem fontWeight={500}>{station.name}</GridItem>
+                      <GridItem>
+                        <Text
+                          fontWeight={500}
+                          fontSize={"14px"}
+                          whiteSpace={"nowrap"}
+                          textOverflow={"ellipsis"}
+                          overflow={"hidden"}
+                          width={"170px"}
+                          title={station.name}
+                        >
+                          {station.name}
+                        </Text>
+                      </GridItem>
                       <GridItem>
                         <Button
                           type="button"

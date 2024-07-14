@@ -14,207 +14,167 @@ export default function Home() {
   const containerRef = useRef(null);
   const response = {
     code: 100,
+    message: "ok",
     data: {
       stories: [
         {
-          id: "sdfsdf",
-          thumb: "asdasd",
+          id: "9D1A5F47-52F3-EE11-A29C-005056010275",
+          thumb:
+            "https://api.otovinn.com/OTOVINN/Attachments/Thumb/9D1A5F47-52F3-EE11-A29C-005056010275.jpeg",
           type: "image",
-          url: "https://buffer.com/cdn-cgi/image/w=1000,fit=contain,q=90,f=auto/library/content/images/size/w600/2023/10/free-images.jpg",
+          url: "https://api.otovinn.com/OTOVINN/Attachments/Snap/9D1A5F47-52F3-EE11-A29C-005056010275.jpg",
         },
         {
-          id: "fdsdsfg",
-          thumb: "asdasdas",
+          id: "98812DAD-B51D-EF11-A29D-005056010275",
+          thumb:
+            "https://api.otovinn.com/OTOVINN/Attachments/Thumb/98812DAD-B51D-EF11-A29D-005056010275.jpeg",
           type: "image",
-          url: "https://letsenhance.io/static/8f5e523ee6b2479e26ecc91b9c25261e/1015f/MainAfter.jpg",
+          url: "https://api.otovinn.com/OTOVINN/Attachments/Snap/98812DAD-B51D-EF11-A29D-005056010275.png",
         },
         {
-          id: "as",
-          thumb: "ss",
+          id: "DE546064-8562-EE11-A29C-005056010275",
+          thumb:
+            "https://api.otovinn.com/OTOVINN/Attachments/Thumb/DE546064-8562-EE11-A29C-005056010275.jpeg",
           type: "image",
-          url: "https://cdn.pixabay.com/photo/2024/05/26/10/15/bird-8788491_1280.jpg",
+          url: "https://api.otovinn.com/OTOVINN/Attachments/Snap/DE546064-8562-EE11-A29C-005056010275.jpg",
         },
         {
-          id: "sss",
-          thumb: "asdasdasdasd",
+          id: "C690791F-AE0E-EF11-A29D-005056010275",
+          thumb:
+            "https://api.otovinn.com/OTOVINN/Attachments/Thumb/C690791F-AE0E-EF11-A29D-005056010275.png",
           type: "image",
-          url: "https://buffer.com/cdn-cgi/image/w=1000,fit=contain,q=90,f=auto/library/content/images/size/w600/2023/10/free-images.jpg",
+          url: "https://api.otovinn.com/OTOVINN/Attachments/Snap/C690791F-AE0E-EF11-A29D-005056010275.jpg",
         },
         {
-          id: "tgfg",
-          thumb: "dfgdf",
+          id: "505BA5BB-47D1-EE11-A29C-005056010275",
+          thumb:
+            "https://api.otovinn.com/OTOVINN/Attachments/Thumb/505BA5BB-47D1-EE11-A29C-005056010275.png",
           type: "image",
-          url: "https://letsenhance.io/static/8f5e523ee6b2479e26ecc91b9c25261e/1015f/MainAfter.jpg",
-        },
-        {
-          id: "cvbcv",
-          thumb: "cvbcvb",
-          type: "image",
-          url: "https://cdn.pixabay.com/photo/2024/05/26/10/15/bird-8788491_1280.jpg",
-        },
-        {
-          id: "ssss",
-          thumb: "sdfg",
-          type: "image",
-          url: "https://buffer.com/cdn-cgi/image/w=1000,fit=contain,q=90,f=auto/library/content/images/size/w600/2023/10/free-images.jpg",
+          url: "https://api.otovinn.com/OTOVINN/Attachments/Snap/505BA5BB-47D1-EE11-A29C-005056010275.jpg",
         },
       ],
       menu: [
-        { id: "aa", title: "Otopark" },
-        { id: "ss", title: "Vale Noktaları" },
-        { id: "dd", title: "Oto Yıkama" },
-        { id: "ww", title: "Oto Kuaför" },
-        { id: "ff", title: "Lastik" },
-        { id: "tt", title: "Servis" },
-        { id: "gg", title: "Ekspertiz" },
-        { id: "hh", title: "Şarj" },
+        {
+          id: "8",
+          title: "Şarj",
+        },
+        {
+          id: "5",
+          title: "Lastik",
+        },
+        {
+          id: "7",
+          title: "Ekspertiz",
+        },
+        {
+          id: "6",
+          title: "Servis",
+        },
+        {
+          id: "4",
+          title: "Oto Kuaför",
+        },
+        {
+          id: "2",
+          title: "Oto Yıkama",
+        },
+        {
+          id: "1",
+          title: "Otopark",
+        },
+        {
+          id: "3",
+          title: "Vale",
+        },
       ],
       slider: [
         {
-          id: "ffee",
-          url: "https://www.industrialempathy.com/img/remote/ZiClJf-1920w.jpg",
+          id: "8BCF281D-7738-EF11-A29D-005056010275",
+          url: "https://api.otovinn.com/OTOVINN/Attachments/SliderMobil/8BCF281D-7738-EF11-A29D-005056010275.jpg",
         },
         {
-          id: "deee",
-          url: "https://tinypng.com/images/social/website.jpg",
+          id: "428B21A2-AD0E-EF11-A29D-005056010275",
+          url: "https://api.otovinn.com/OTOVINN/Attachments/SliderMobil/428B21A2-AD0E-EF11-A29D-005056010275.jpg",
         },
         {
-          id: "gererfsdf",
-          url: "https://wallpapers.com/images/featured/image-pictures-79gc4p3mqu7an848.jpg",
+          id: "603151CB-BD0E-EF11-A29D-005056010275",
+          url: "https://api.otovinn.com/OTOVINN/Attachments/SliderMobil/603151CB-BD0E-EF11-A29D-005056010275.jpg",
         },
         {
-          id: "asds",
-          url: "https://deep-image.ai/blog/content/images/2022/09/underwater-magic-world-8tyxt9yz.jpeg",
-        },
-        {
-          id: "eee",
-          url: "https://www.industrialempathy.com/img/remote/ZiClJf-1920w.jpg",
-        },
-        {
-          id: "ddd",
-          url: "https://tinypng.com/images/social/website.jpg",
-        },
-        {
-          id: "fff",
-          url: "https://wallpapers.com/images/featured/image-pictures-79gc4p3mqu7an848.jpg",
-        },
-        {
-          id: "vvv",
-          url: "https://deep-image.ai/blog/content/images/2022/09/underwater-magic-world-8tyxt9yz.jpeg",
+          id: "07F06FAD-B31D-EF11-A29D-005056010275",
+          url: "https://api.otovinn.com/OTOVINN/Attachments/SliderMobil/07F06FAD-B31D-EF11-A29D-005056010275.jpg",
         },
       ],
       stations: [
-        {
-          title: "Yakınımdakiler",
-          order: 1,
-          station: [
-            {
-              name: "aa",
-              image:
-                "https://imageio.forbes.com/specials-images/imageserve/5d35eacaf1176b0008974b54/2020-Chevrolet-Corvette-Stingray/0x0.jpg?format=jpg&crop=4560,2565,x790,y784,safe&width=960",
-              point: 4,
-            },
-            {
-              name: "bb",
-              image:
-                "https://cdn.motor1.com/images/mgl/NGGZon/s3/koenigsegg-gemera.jpg",
-              point: 2,
-            },
-            {
-              name: "cc",
-              image:
-                "https://media.product.which.co.uk/prod/images/original/222f4a4449ce-best-cars-inline2.jpg",
-              point: 1,
-            },
-            {
-              name: "dd",
-              image:
-                "https://hips.hearstapps.com/hmg-prod/images/2024-10best-cadillac-ct5-v-blackwing-656e54ae7ba4a.jpg?crop=1xw:0.8888333333333334xh;center,top&resize=2048:*",
-              point: 0,
-            },
-          ],
-        },
         {
           title: "Son Alınan Hizmetler",
           order: 2,
           station: [
             {
-              name: "yy",
+              name: "Mb Oto Yıkama",
               image:
-                "https://media.product.which.co.uk/prod/images/original/222f4a4449ce-best-cars-inline2.jpg",
-              point: 1,
-            },
-            {
-              name: "gg",
-              image:
-                "https://cdn.motor1.com/images/mgl/mrz1e/s1/coolest-cars-feature.webp",
-              point: 4,
-            },
-            {
-              name: "ff",
-              image:
-                "https://cdn.motor1.com/images/mgl/NGGZon/s3/koenigsegg-gemera.jpg",
-              point: 5,
-            },
-            {
-              name: "qq",
-              image:
-                "https://cfx-wp-images.imgix.net/2022/05/2022-Dodge-Challenger-Copy-scaled.jpg?auto=compress%2Cformat&ixlib=php-3.3.1&s=4c7ab559e27d6425ba449ffe8a0c62b5",
-              point: 2,
-            },
-            {
-              name: "ss",
-              image:
-                "https://hips.hearstapps.com/hmg-prod/images/2024-10best-cadillac-ct5-v-blackwing-656e54ae7ba4a.jpg?crop=1xw:0.8888333333333334xh;center,top&resize=2048:*",
+                "https://api.otovinn.com/OTOVINN//Attachments/IstasyonFotografi/5DC5A7D9-86DC-EE11-A29C-005056010275.jpeg",
               point: 3,
             },
             {
-              name: "dd",
+              name: "Aşkın Oto Yıkama",
               image:
-                "https://imageio.forbes.com/specials-images/imageserve/5d35eacaf1176b0008974b54/2020-Chevrolet-Corvette-Stingray/0x0.jpg?format=jpg&crop=4560,2565,x790,y784,safe&width=960",
-              point: 0,
+                "https://api.otovinn.com/OTOVINN//Attachments/IstasyonFotografi/078D682B-337A-EE11-A29C-005056010275.jpeg",
+              point: 2,
             },
             {
-              name: "eeeeeeeeee",
+              name: "The North Florya - Otopark ve Otoyıkama",
               image:
-                "https://imageio.forbes.com/specials-images/imageserve/5d35eacaf1176b0008974b54/2020-Chevrolet-Corvette-Stingray/0x0.jpg?format=jpg&crop=4560,2565,x790,y784,safe&width=960",
-              point: 5,
+                "https://api.otovinn.com/OTOVINN//Attachments/IstasyonFotografi/EB68384E-78E3-ED11-A29B-005056010275.jpeg",
+              point: 4,
             },
           ],
         },
         {
-          title: "Haftanın En'leri",
+          title: "Haftanın Enleri",
           order: 3,
           station: [
             {
-              name: "uu",
+              name: "The North Florya - Otopark ve Otoyıkama",
               image:
-                "https://cdn.motor1.com/images/mgl/NGGZon/s3/koenigsegg-gemera.jpg",
-              point: 5,
+                "https://api.otovinn.com/OTOVINN//Attachments/IstasyonFotografi/EB68384E-78E3-ED11-A29B-005056010275.jpeg",
+              point: 4,
             },
             {
-              name: "kk",
+              name: "Barış Otopark ve Otoyıkama",
               image:
-                "https://imageio.forbes.com/specials-images/imageserve/5d35eacaf1176b0008974b54/2020-Chevrolet-Corvette-Stingray/0x0.jpg?format=jpg&crop=4560,2565,x790,y784,safe&width=960",
-              point: 5,
-            },
-            {
-              name: "jj",
-              image:
-                "https://hips.hearstapps.com/hmg-prod/images/2024-10best-cadillac-ct5-v-blackwing-656e54ae7ba4a.jpg?crop=1xw:0.8888333333333334xh;center,top&resize=2048:*",
-              point: 3,
-            },
-            {
-              name: "hh",
-              image:
-                "https://cdn.motor1.com/images/mgl/mrz1e/s1/coolest-cars-feature.webp",
-              point: 3,
-            },
-            {
-              name: "nn",
-              image:
-                "https://cfx-wp-images.imgix.net/2022/05/2022-Dodge-Challenger-Copy-scaled.jpg?auto=compress%2Cformat&ixlib=php-3.3.1&s=4c7ab559e27d6425ba449ffe8a0c62b5",
+                "https://api.otovinn.com/OTOVINN//Attachments/IstasyonFotografi/078D682B-337A-EE11-A29C-005056010275.jpeg",
               point: 2,
+            },
+            {
+              name: "Mb Oto Yıkama",
+              image:
+                "https://api.otovinn.com/OTOVINN//Attachments/IstasyonFotografi/5DC5A7D9-86DC-EE11-A29C-005056010275.jpeg",
+              point: 3,
+            },
+          ],
+        },
+        {
+          title: "Yakınımdakiler",
+          order: 1,
+          station: [
+            {
+              name: "Premier Auto Spa",
+              image:
+                "https://api.otovinn.com/OTOVINN//Attachments/IstasyonFotografi/D9BF179F-41AA-EE11-A29C-005056010275.jpeg",
+              point: 5,
+            },
+            {
+              name: "Atlas Oto Yıkama Oto Kuaför",
+              image:
+                "https://api.otovinn.com/OTOVINN//Attachments/IstasyonFotografi/ABA03CE9-B8AF-EE11-A29C-005056010275.jpeg",
+              point: 4,
+            },
+            {
+              name: "ERC Garage",
+              image:
+                "https://api.otovinn.com/OTOVINN//Attachments/IstasyonFotografi/245DC5DE-D576-ED11-BED5-005056010E56.jpeg",
+              point: 3,
             },
           ],
         },
