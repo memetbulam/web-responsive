@@ -22,12 +22,12 @@ interface Props {
 
 const StoriesSide: FC<Props> = ({ response }) => {
   const innerItemWidthResponsiveValue = useBreakpointValue({
-    base: 86,
-    sm: 106,
-    md: 116,
-    lg: 116,
-    xl: 116,
-    "2xl": 116,
+    base: 106,
+    sm: 116,
+    md: 146,
+    lg: 166,
+    xl: 166,
+    "2xl": 144,
   });
 
   return (
@@ -51,10 +51,10 @@ const StoriesSide: FC<Props> = ({ response }) => {
               borderRadius={"50%"}
             >
               <Image
-                minW={{ base: "70px", sm: "90px", md: "100px", lg: "100px" }}
-                maxW={{ base: "70px", sm: "90px", md: "100px", lg: "100px" }}
-                minH={{ base: "70px", sm: "90px", md: "100px", lg: "100px" }}
-                maxH={{ base: "70px", sm: "90px", md: "100px", lg: "100px" }}
+                minW={{ base: "90px", sm: "100px", md: "130px", lg: "150px" }}
+                maxW={{ base: "90px", sm: "100px", md: "130px", lg: "150px" }}
+                minH={{ base: "90px", sm: "100px", md: "130px", lg: "150px" }}
+                maxH={{ base: "90px", sm: "100px", md: "130px", lg: "150px" }}
                 borderRadius={"50%"}
                 src={story.url}
                 draggable={false}
