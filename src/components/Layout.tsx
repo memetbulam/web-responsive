@@ -41,7 +41,7 @@ const Layout: FC<Props> = ({ children }) => {
               fontSize={{ base: "12px", sm: "14px", md: "16px" }}
               textAlign={"end"}
             >
-              Hos geldin, <b>{userInfo?.userName}</b>
+              Hoş geldin, <b>{userInfo?.userName}</b>
             </Text>
             <Button
               backgroundColor={"gray.100"}

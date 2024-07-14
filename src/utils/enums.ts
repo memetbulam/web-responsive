@@ -17,3 +17,11 @@ export enum InputTypes {
   Password = "password",
   Email = "email",
 }
+
+export enum ChakraUiAlertStatus {
+  Error = "error",
+  Info = "info",
+  Success = "success",
+  Warning = "warning",
+  Loading = "loading",
+}

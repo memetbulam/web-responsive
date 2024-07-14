@@ -1,4 +1,4 @@
-import { StationHoveredIconKeys } from "./enums";
+import { ChakraUiAlertStatus, StationHoveredIconKeys } from "./enums";
 
 export type StationHoveredIcon = {
   key: StationHoveredIconKeys | undefined;
@@ -47,4 +47,10 @@ export type LoginApiResponse = {
   code: 100 | 101;
   token: string;
   message: string;
+};
+
+export type ChakraUiAlertState = {
+  isShowAlert: boolean;
+  message: string;
+  status: ChakraUiAlertStatus | undefined;
 };

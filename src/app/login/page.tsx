@@ -2,18 +2,24 @@
 import React, { FormEventHandler, useCallback, useState } from "react";
 import useDataFetch from "@/hooks/useDataFetch";
 import { urls } from "@/utils/urls";
-import { Button, Flex, Input, Text } from "@chakra-ui/react";
+import { Button, Flex, Text } from "@chakra-ui/react";
 import { useRouter } from "next/navigation";
 import Cookies from "js-cookie";
 import DefaultInput from "@/components/form-elements/DefaultInput";
 import PasswordInput from "@/components/form-elements/PasswordInput";
-import { InputTypes } from "@/utils/enums";
-import { LoginApiResponse } from "@/utils/types";
+import { ChakraUiAlertStatus, InputTypes } from "@/utils/enums";
+import { ChakraUiAlertState, LoginApiResponse } from "@/utils/types";
+import CustomAlert from "@/components/CustomAlert";
 
 const Login = () => {
   const [inputValues, setInputValues] = useState({
     userName: "",
     password: "",
+  });
+  const [isShowAlert, setIsShowAlert] = useState<ChakraUiAlertState>({
+    isShowAlert: false,
+    message: "",
+    status: undefined,
   });
 
   const router = useRouter();
@@ -53,6 +59,11 @@ const Login = () => {
         );
         router.push("/");
       } else if (response.code === 101) {
+        setIsShowAlert({
+          isShowAlert: true,
+          message: response.message,
+          status: ChakraUiAlertStatus.Error,
+        });
         Cookies.remove("token");
         Cookies.remove("userInfo");
       }
@@ -150,6 +161,7 @@ const Login = () => {
           </Button>
         </form>
       </Flex>
+      <CustomAlert isShowAlert={isShowAlert} setIsShowAlert={setIsShowAlert} />
     </Flex>
   );
 };
