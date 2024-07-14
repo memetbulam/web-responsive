@@ -30,3 +30,8 @@ export enum SliderButtonDirection {
   Left = "left",
   Right = "right",
 }
+
+export enum ApiStatusCode {
+  Success = 100,
+  Error = 101,
+}

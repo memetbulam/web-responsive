@@ -5,7 +5,7 @@ import { useRouter } from "next/navigation";
 import Cookies from "js-cookie";
 import DefaultInput from "@/components/form-elements/DefaultInput";
 import PasswordInput from "@/components/form-elements/PasswordInput";
-import { ChakraUiAlertStatus, InputTypes } from "@/utils/enums";
+import { ApiStatusCode, ChakraUiAlertStatus, InputTypes } from "@/utils/enums";
 import { ChakraUiAlertState, LoginApiResponse } from "@/utils/types";
 import CustomAlert from "@/components/CustomAlert";
 
@@ -31,26 +31,26 @@ const Login = () => {
         inputValues?.password === "123456"
       ) {
         response = {
-          code: 100,
+          code: ApiStatusCode.Success,
           token: "AhYmPkQvugWUSKyyODcAJLlsPzNLMJutAehWWoTdiTfGUydQQi",
           message: "İşlem başarılı",
         };
       } else {
         response = {
-          code: 101,
+          code: ApiStatusCode.Error,
           token: "",
           message: "userName yada password hatalı",
         };
       }
 
-      if (response.code === 100) {
+      if (response.code === ApiStatusCode.Success) {
         Cookies.set("token", response.token);
         Cookies.set(
           "userInfo",
           JSON.stringify({ userName: inputValues.userName })
         );
         router.push("/");
-      } else if (response.code === 101) {
+      } else if (response.code === ApiStatusCode.Error) {
         setIsShowAlert({
           isShowAlert: true,
           message: response.message,

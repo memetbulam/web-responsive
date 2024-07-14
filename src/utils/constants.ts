@@ -3,9 +3,10 @@ import { ApiResponse } from "./types";
 import CartShoppingIcon from "@/components/icons/CartShoppingIcon";
 import CarIcon from "@/components/icons/CarIcon";
 import UserIcon from "@/components/icons/UserIcon";
+import { ApiStatusCode } from "./enums";
 
 export const response: ApiResponse = {
-  code: 100,
+  code: ApiStatusCode.Success,
   message: "ok",
   data: {
     stories: [

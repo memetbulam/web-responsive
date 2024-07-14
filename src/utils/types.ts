@@ -1,4 +1,8 @@
-import { ChakraUiAlertStatus, StationHoveredIconKeys } from "./enums";
+import {
+  ApiStatusCode,
+  ChakraUiAlertStatus,
+  StationHoveredIconKeys,
+} from "./enums";
 
 export type StationHoveredIcon = {
   key: StationHoveredIconKeys | undefined;
@@ -33,7 +37,7 @@ export type StationsData = {
 };
 
 export type ApiResponse = {
-  code: 100 | 101;
+  code: ApiStatusCode;
   message: string;
   data: {
     stories: StoriesData[];
@@ -44,7 +48,7 @@ export type ApiResponse = {
 };
 
 export type LoginApiResponse = {
-  code: 100 | 101;
+  code: ApiStatusCode;
   token: string;
   message: string;
 };
