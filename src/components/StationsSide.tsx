@@ -53,9 +53,9 @@ const StationsSide: FC<Props> = ({ stationsData }) => {
                     padding={"12px 20px"}
                   >
                     <Image
-                      width={"100px"}
+                      width={"120px"}
                       height={"100px"}
-                      minWidth={"100px"}
+                      minWidth={"120px"}
                       minHeight={"100px"}
                       borderRadius={"12px"}
                       draggable={false}
@@ -97,7 +97,7 @@ const StationsSide: FC<Props> = ({ stationsData }) => {
                           whiteSpace={"nowrap"}
                           textOverflow={"ellipsis"}
                           overflow={"hidden"}
-                          width={"170px"}
+                          width={"150px"}
                           title={station.name}
                         >
                           {station.name}
