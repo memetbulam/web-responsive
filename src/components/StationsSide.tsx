@@ -41,7 +41,8 @@ const StationsSide: FC<Props> = ({ stationsData }) => {
               dataLength={item?.station?.length}
               innerItemWidth={320}
             >
-              {item.station.map((station) => {
+              {item.station.map((station, index) => {
+                const lastIndex = index === item.station.length - 1;
                 return (
                   <Flex
                     key={station?.name}
@@ -51,6 +52,7 @@ const StationsSide: FC<Props> = ({ stationsData }) => {
                     alignItems={"center"}
                     borderRadius={"12px"}
                     padding={"12px 20px"}
+                    marginRight={lastIndex ? "0px" : "16px"}
                   >
                     <Image
                       width={"120px"}

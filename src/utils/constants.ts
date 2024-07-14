@@ -1,8 +1,5 @@
 import { ApiResponse } from "./types";
 
-export const draggableDataBetweenSpacing = 16;
-export const draggableDataMaxLeftValue = 0;
-
 export const response: ApiResponse = {
   code: 100,
   message: "ok",

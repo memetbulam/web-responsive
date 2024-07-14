@@ -4,12 +4,9 @@ import React, {
   ReactNode,
   TouchEventHandler,
   useCallback,
-  useEffect,
   useRef,
   useState,
 } from "react";
-import { draggableDataBetweenSpacing } from "@/utils/constants";
-import { draggableDataMouseAndTouchMove } from "@/utils/helpers";
 import { Flex } from "@chakra-ui/react";
 
 interface Props {
@@ -19,93 +16,63 @@ interface Props {
 }
 
 const DraggableData: FC<Props> = ({ children, dataLength, innerItemWidth }) => {
-  const containerRef = useRef<HTMLDivElement>(null);
-  const [isDragging, setIsDragging] = useState(false);
-  const [dragPosition, setDragPosition] = useState(0);
-  const [containerWidth, setContainerWidth] = useState(0);
-  const [startTouchPosition, setStartTouchPosition] = useState(0);
+  const draggableContainerRef = useRef<HTMLDivElement>(null);
+  const [isDragStart, setIsDragStart] = useState(false);
+  const [dragStartPositionX, setDragStartPositionX] = useState(0);
+  const [scrollLeftValue, setScrollLeftValue] = useState(0);
 
-  useEffect(() => {
-    if (containerRef.current) {
-      setContainerWidth(containerRef.current.offsetWidth);
-    }
-
-    const handleResize = () => {
-      if (containerRef.current) {
-        setContainerWidth(containerRef.current.offsetWidth);
+  const handleDragStart: TouchEventHandler<HTMLDivElement> &
+    MouseEventHandler<HTMLDivElement> = useCallback(
+    (event) => {
+      if (draggableContainerRef.current) {
+        setIsDragStart(true);
+        setDragStartPositionX(
+          (event as React.MouseEvent<HTMLDivElement>).pageX ||
+            (event as React.TouchEvent<HTMLDivElement>).touches[0].pageX -
+              draggableContainerRef.current.offsetLeft
+        );
+        setScrollLeftValue(draggableContainerRef.current.scrollLeft);
       }
-    };
-
-    window.addEventListener("resize", handleResize);
-
-    return () => {
-      window.removeEventListener("resize", handleResize);
-    };
-  }, []);
-
-  const handleMouseMove: MouseEventHandler<HTMLDivElement> = useCallback(
-    (e) => {
-      const isLeftMovement = e.movementX < 0;
-      const isRightMovement = e.movementX > 0;
-      const maxRightDraggableValue = Math.max(
-        0,
-        dataLength * innerItemWidth -
-          containerWidth +
-          draggableDataBetweenSpacing * (dataLength - 1)
-      );
-
-      return draggableDataMouseAndTouchMove({
-        isMobile: false,
-        isLeftMovement,
-        isRightMovement,
-        setDragPosition,
-        maxRightDraggableValue,
-        isDragging,
-        mouseMovementX: e.movementX,
-      });
     },
-    [containerWidth, dataLength, innerItemWidth, isDragging]
+    [draggableContainerRef]
   );
 
-  const handleTouchMove: TouchEventHandler<HTMLDivElement> = useCallback(
-    (e) => {
-      const isLeftMovement = e.touches[0].clientX < startTouchPosition;
-      const isRightMovement = e.touches[0].clientX > startTouchPosition;
-      const maxRightDraggableValue = Math.max(
-        0,
-        dataLength * innerItemWidth -
-          containerWidth +
-          draggableDataBetweenSpacing * (dataLength - 1)
-      );
+  const handleDragEnd = useCallback(() => {
+    setIsDragStart(false);
+  }, []);
 
-      return draggableDataMouseAndTouchMove({
-        isMobile: true,
-        isLeftMovement,
-        isRightMovement,
-        setDragPosition,
-        maxRightDraggableValue,
-      });
+  const handleDragMove: TouchEventHandler<HTMLDivElement> &
+    MouseEventHandler<HTMLDivElement> = useCallback(
+    (event) => {
+      if (!isDragStart) return;
+      event.preventDefault();
+      if (draggableContainerRef?.current) {
+        const screenPositionX =
+          (event as React.MouseEvent<HTMLDivElement, MouseEvent>)?.pageX ||
+          (event as React.TouchEvent<HTMLDivElement>)?.touches[0].pageX -
+            draggableContainerRef.current.offsetLeft;
+        const activeMovement = (screenPositionX - dragStartPositionX) * 1.2;
+        draggableContainerRef.current.scrollLeft =
+          scrollLeftValue - activeMovement;
+      }
     },
-    [containerWidth, dataLength, innerItemWidth, startTouchPosition]
+    [dragStartPositionX, isDragStart, scrollLeftValue]
   );
 
   return (
     <Flex
-      ref={containerRef}
       overflow={"hidden"}
-      onMouseLeave={() => setIsDragging(false)}
+      position={"relative"}
+      ref={draggableContainerRef}
+      onMouseDown={handleDragStart}
+      onMouseLeave={handleDragEnd}
+      onMouseUp={handleDragEnd}
+      onMouseMove={handleDragMove as MouseEventHandler<HTMLDivElement>}
+      onTouchStart={handleDragStart}
+      onTouchEnd={handleDragEnd}
+      onTouchMove={handleDragMove as TouchEventHandler<HTMLDivElement>}
     >
-      <Flex
-        gap={`${draggableDataBetweenSpacing}px`}
-        onMouseDown={() => setIsDragging(true)}
-        onTouchStart={(e) => setStartTouchPosition(e.touches[0].clientX)}
-        onMouseUp={() => setIsDragging(false)}
-        transform={`translateX(${dragPosition}px)`}
-        onMouseMove={handleMouseMove}
-        onTouchMove={handleTouchMove}
-      >
-        {children}
-      </Flex>
+      <Flex transition={"transform 0.3s"}>{children}</Flex>
     </Flex>
   );
 };

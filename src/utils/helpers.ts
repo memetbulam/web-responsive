@@ -1,5 +1,4 @@
 import { Dispatch, SetStateAction } from "react";
-import { draggableDataMaxLeftValue } from "./constants";
 
 export const getStoriesMouseMove = (
   isLeftSideMovement: boolean,
@@ -77,57 +76,5 @@ export const getStoriesTouchMove = (
       ...prev,
       value: prev.value - 3,
     }));
-  }
-};
-
-export const draggableDataMouseAndTouchMove = ({
-  isMobile,
-  isLeftMovement,
-  isRightMovement,
-  setDragPosition,
-  maxRightDraggableValue,
-  isDragging,
-  mouseMovementX,
-}: {
-  isMobile: boolean;
-  isLeftMovement: boolean;
-  isRightMovement: boolean;
-  setDragPosition: Dispatch<SetStateAction<number>>;
-  maxRightDraggableValue: number;
-  isDragging?: boolean;
-  mouseMovementX?: number;
-}) => {
-  if (isMobile) {
-    if (isLeftMovement) {
-      setDragPosition((prev) => {
-        if (prev >= -maxRightDraggableValue) {
-          return prev - 2;
-        }
-        return -maxRightDraggableValue;
-      });
-    } else if (isRightMovement) {
-      setDragPosition((prev) => {
-        if (prev < draggableDataMaxLeftValue) {
-          return prev + 2;
-        }
-        return draggableDataMaxLeftValue;
-      });
-    }
-  } else {
-    if (isDragging && isLeftMovement && mouseMovementX) {
-      setDragPosition((prev) => {
-        if (prev >= -maxRightDraggableValue) {
-          return prev + mouseMovementX;
-        }
-        return -maxRightDraggableValue;
-      });
-    } else if (isDragging && isRightMovement) {
-      setDragPosition((prev) => {
-        if (prev < draggableDataMaxLeftValue && mouseMovementX) {
-          return prev + mouseMovementX;
-        }
-        return draggableDataMaxLeftValue;
-      });
-    }
   }
 };
