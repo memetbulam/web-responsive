@@ -21,7 +21,7 @@ const OutSideWrapper: FC<{
     return () => {
       document.removeEventListener("mousedown", handleClickOutside);
     };
-  }, []);
+  }, [handleOutSideClick]);
 
   return <Box ref={wrapperRef}>{children}</Box>;
 };
