@@ -1,4 +1,8 @@
+import HomeIcon from "@/components/icons/HomeIcon";
 import { ApiResponse } from "./types";
+import CartShoppingIcon from "@/components/icons/CartShoppingIcon";
+import CarIcon from "@/components/icons/CarIcon";
+import UserIcon from "@/components/icons/UserIcon";
 
 export const response: ApiResponse = {
   code: 100,
@@ -169,3 +173,30 @@ export const response: ApiResponse = {
     ],
   },
 };
+
+export const topbarMenu = [
+  {
+    key: "home",
+    title: "Ana Sayfa",
+    icon: HomeIcon,
+    path: "/",
+  },
+  {
+    key: "myCart",
+    title: "Sepetim",
+    icon: CartShoppingIcon,
+    path: "/",
+  },
+  {
+    key: "myCars",
+    title: "Araçlarım",
+    icon: CarIcon,
+    path: "/",
+  },
+  {
+    key: "profile",
+    title: "Profil",
+    icon: UserIcon,
+    path: "",
+  },
+];
