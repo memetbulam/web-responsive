@@ -1,26 +1,13 @@
 import React, { FC } from "react";
 import { Box, Flex, Image, useBreakpointValue } from "@chakra-ui/react";
 import DraggableData from "./DraggableData";
+import { StoriesData } from "@/utils/types";
 
 interface Props {
-  response: {
-    code: number;
-    data: {
-      stories: {
-        id: string;
-        thumb: string;
-        type: string;
-        url: string;
-      }[];
-      menu: {
-        id: string;
-        title: string;
-      }[];
-    };
-  };
+  storiesData: StoriesData[];
 }
 
-const StoriesSide: FC<Props> = ({ response }) => {
+const StoriesSide: FC<Props> = ({ storiesData }) => {
   const innerItemWidthResponsiveValue = useBreakpointValue({
     base: 106,
     sm: 116,
@@ -39,10 +26,10 @@ const StoriesSide: FC<Props> = ({ response }) => {
       userSelect={"none"}
     >
       <DraggableData
-        dataLength={response.data.stories.length}
+        dataLength={storiesData?.length}
         innerItemWidth={innerItemWidthResponsiveValue as number}
       >
-        {response.data.stories.map((story) => {
+        {storiesData?.map((story) => {
           return (
             <Box
               key={story.id}

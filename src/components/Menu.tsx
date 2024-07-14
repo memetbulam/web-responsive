@@ -1,28 +1,15 @@
-import { chakraUiTheme } from "@/utils/theme";
-import { Box, Flex, useBreakpointValue } from "@chakra-ui/react";
-import Link from "next/link";
 import React, { FC, useMemo, useState } from "react";
+import Link from "next/link";
+import { chakraUiTheme } from "@/utils/theme";
+import { MenuData } from "@/utils/types";
+import { Flex, useBreakpointValue } from "@chakra-ui/react";
 
 interface Props {
   searchValue: string;
-  response: {
-    code: number;
-    data: {
-      stories: {
-        id: string;
-        thumb: string;
-        type: string;
-        url: string;
-      }[];
-      menu: {
-        id: string;
-        title: string;
-      }[];
-    };
-  };
+  menuData: MenuData[];
 }
 
-const Menu: FC<Props> = ({ response, searchValue }) => {
+const Menu: FC<Props> = ({ menuData, searchValue }) => {
   const [isHovered, setIsHovered] = useState({ key: "", value: false });
   const widthAndHeightResponsiveValue = useBreakpointValue({
     base: "90px",
@@ -37,11 +24,13 @@ const Menu: FC<Props> = ({ response, searchValue }) => {
     md: "16px",
   });
 
-  const searchedData = useMemo(() => {
-    return response?.data?.menu?.filter((item) =>
-      item.title.toLowerCase().includes(searchValue?.toLowerCase())
-    );
-  }, [response?.data?.menu, searchValue]);
+  const searchedData = useMemo(
+    () =>
+      menuData?.filter((item) =>
+        item.title.toLowerCase().includes(searchValue?.toLowerCase())
+      ),
+    [menuData, searchValue]
+  );
 
   return (
     <Flex

@@ -1,4 +1,4 @@
-import React, { FC, useState } from "react";
+import React, { FC, useMemo, useState } from "react";
 import { Image, Flex, Text, Grid, GridItem, Button } from "@chakra-ui/react";
 import DraggableData from "./DraggableData";
 import StarIcon from "./icons/StarIcon";
@@ -6,46 +6,20 @@ import { chakraUiTheme } from "@/utils/theme";
 import CalendarIcon from "./icons/CalendarIcon";
 import HeartIcon from "./icons/HeartIcon";
 import { StationHoveredIconKeys } from "@/utils/enums";
-import { StationHoveredIcon } from "@/utils/types";
+import { StationHoveredIcon, StationsData } from "@/utils/types";
 
 interface Props {
-  response: {
-    code: number;
-    data: {
-      stories: {
-        id: string;
-        thumb: string;
-        type: string;
-        url: string;
-      }[];
-      menu: {
-        id: string;
-        title: string;
-      }[];
-      slider: {
-        id: string;
-        url: string;
-      }[];
-      stations: {
-        title: string;
-        order: number;
-        station: {
-          name: string;
-          image: string;
-          point: number;
-        }[];
-      }[];
-    };
-  };
+  stationsData: StationsData[];
 }
 
-const StationsSide: FC<Props> = ({ response }) => {
+const StationsSide: FC<Props> = ({ stationsData }) => {
   const [isHoveredButton, setIsHoveredButton] = useState<StationHoveredIcon>({
     key: undefined,
     value: false,
   });
-  const sortedData = response?.data?.stations?.sort(
-    (a, b) => a.order - b.order
+  const sortedData = useMemo(
+    () => stationsData?.sort((a, b) => a.order - b.order),
+    [stationsData]
   );
 
   return (

@@ -3,29 +3,12 @@ import { Box, Flex, Image, useBreakpoint } from "@chakra-ui/react";
 import SiliderButton from "./SiliderButton";
 import { useSliderContext } from "@/contexts/useSliderContext";
 import { breakpointsValues } from "@/utils/enums";
+import { SliderData } from "@/utils/types";
 
 interface Props {
-  response: {
-    code: number;
-    data: {
-      stories: {
-        id: string;
-        thumb: string;
-        type: string;
-        url: string;
-      }[];
-      menu: {
-        id: string;
-        title: string;
-      }[];
-      slider: {
-        id: string;
-        url: string;
-      }[];
-    };
-  };
+  sliderData: SliderData[];
 }
-const CampaignsSide: FC<Props> = ({ response }) => {
+const CampaignsSide: FC<Props> = ({ sliderData }) => {
   const {
     sliderTranslateXValue,
     setSliderTranslateXValue,
@@ -33,10 +16,7 @@ const CampaignsSide: FC<Props> = ({ response }) => {
   } = useSliderContext();
   const currentBreakpointValue = useBreakpoint();
 
-  const dataLength = useMemo(
-    () => response?.data?.slider?.length,
-    [response?.data?.slider?.length]
-  );
+  const dataLength = useMemo(() => sliderData?.length, [sliderData?.length]);
 
   useEffect(() => {
     const sliderInterval = setInterval(() => {
@@ -70,7 +50,7 @@ const CampaignsSide: FC<Props> = ({ response }) => {
         margin={"10px 20px"}
         overflow={"hidden"}
       >
-        {response?.data?.slider?.map((slider) => {
+        {sliderData?.map((slider) => {
           return (
             <Box
               key={slider.id}
@@ -127,11 +107,11 @@ const CampaignsSide: FC<Props> = ({ response }) => {
         })}
         <SiliderButton
           buttonDirection={"left"}
-          dataLength={response?.data?.slider?.length}
+          dataLength={sliderData.length}
         />
         <SiliderButton
           buttonDirection={"right"}
-          dataLength={response?.data?.slider?.length}
+          dataLength={sliderData.length}
         />
       </Flex>
     </Box>
